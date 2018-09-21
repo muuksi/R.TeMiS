@@ -129,6 +129,8 @@ readLexisNexisHTML <- FunctionGenerator(function(elem, language, id) {
             # Add a workaround for French
             if (Sys.info()["sysname"] == "Darwin")
                 date <- strptime(sub("[jJ]uillet", "07", strdate), "%d %m %Y")
+            # trying a different format for German
+            if(is.na(date)) date <- strptime(strdate, "%A %e %B")
 
             if(is.na(date))
                 warning(sprintf("Could not parse document date \"%s\". You may need to change the system locale to match that of the corpus. See LC_TIME in ?Sys.setlocale.", strdate))
