@@ -36,10 +36,12 @@ splitfield <- function(nodes, field) {
 
 weekdays <- paste(c("monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday",
                     "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche",
+                    "montag", "dienstag", "mittwoch", "donnerstag", "freitag", "samstag", "sonntag",
                     weekdays(seq(as.Date("2018-01-01"), as.Date("2018-01-07"), by=1))),
                   collapse="|")
 months <- paste(c("january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december",
                   "janvier", "f\u00e9vrier", "mars", "avril", "mai", "juin", "juillet", "ao\u00fbt", "septembre", "octobre", "novembre", "d\u00e9cembre",
+                  "januar", "februar", "m\u00E4rz", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "dezember",
                   months(seq(as.Date("2018-01-01"), as.Date("2018-12-31"), by=31))),
                 collapse="|")
 
@@ -56,7 +58,7 @@ readLexisNexisHTML <- FunctionGenerator(function(elem, language, id) {
         names(nodes) <- sapply(nodes, function(x) xml_text(xml_children(xml_children(x)[[1]])[1], trim=TRUE))
         vals <- sapply(nodes, xml_text, trim=TRUE)
 
-        copyright <- vals[[max(which(grepl("^Copyright", vals)))]]
+        copyright <- "" #vals[[max(which(grepl("^Copyright", vals)))]]
 
         # First item is the document number
         publication <- vals[2]
